@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { useRef } from "react"; // Import useRef
 
 export default function SnippetManager() {
   const [snippets, setSnippets] = useState([]);
@@ -11,6 +12,8 @@ export default function SnippetManager() {
   const [explanation, setExplanation] = useState("");
   const [code, setCode] = useState("");
   const [editingId, setEditingId] = useState(null);
+
+  const explanationRef = useRef(null); // Create a reference for the explanation texta
 
   const { data: session } = useSession();
 
@@ -72,6 +75,13 @@ export default function SnippetManager() {
     setExplanation(snippet.explanation);
     setCode(snippet.code);
     setEditingId(snippet._id);
+
+    // Ensure the textarea gets focused
+    setTimeout(() => {
+      if (explanationRef.current) {
+        explanationRef.current.focus();
+      }
+    }, 0);
   }
 
   function resetForm() {
@@ -82,12 +92,14 @@ export default function SnippetManager() {
 
   return (
     <div className="max-w-2xl mx-auto p-3 pt-1">
-      <button
-        onClick={() => signOut()}
-        className="bg-red-500 text-white  px-6 py-2 mt-3 mb-3 rounded-md"
-      >
-        Log Out
-      </button>
+      <div className="flex justify-end">
+        <button
+          onClick={() => signOut()}
+          className="bg-red-500 text-white  px-6 py-2 mt-3 mb-3 rounded-md"
+        >
+          Log Out
+        </button>
+      </div>
       <h1 className="text-2xl font-bold  text-left">Code Snippet Library</h1>
       <div className="flex-col items-center justify-center gap-5 font-bold mb-4 mt-2 ">
         <div>Hello {session?.user?.name}!</div>
@@ -100,6 +112,7 @@ export default function SnippetManager() {
       {/* Form for adding/editing snippets */}
       <form onSubmit={handleSubmit} className="space-y-4 mb-8">
         <textarea
+          ref={explanationRef} // Attach the reference
           className="w-full p-2 border rounded"
           placeholder="Enter Code function"
           value={explanation}
@@ -114,7 +127,7 @@ export default function SnippetManager() {
           required
         />
         <div className="flex flex-wrap gap-4">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">
+          <button className="bg-emerald-500 text-white px-4 py-2 rounded">
             {editingId ? "Update Snippet" : "Save Snippet"}
           </button>
           {/* Search Field */}
@@ -124,7 +137,7 @@ export default function SnippetManager() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search..."
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border-2 border-red-200 rounded bg-yellow-100"
           />
 
           {editingId && (
