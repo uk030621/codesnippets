@@ -76,10 +76,13 @@ export default function SnippetManager() {
     setCode(snippet.code);
     setEditingId(snippet._id);
 
-    // Ensure the textarea gets focused
     setTimeout(() => {
       if (explanationRef.current) {
         explanationRef.current.focus();
+        explanationRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
       }
     }, 0);
   }
