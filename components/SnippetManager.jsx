@@ -93,16 +93,12 @@ export default function SnippetManager() {
     setEditingId(null);
   }
 
+  function clearSearch() {
+    setSearchQuery("");
+  }
+
   return (
     <div className="w-full mx-auto p-3 pt-1">
-      <div className="flex justify-end">
-        <button
-          onClick={() => signOut()}
-          className="bg-red-500 text-white  px-6 py-2 mt-3 mb-3 rounded-md"
-        >
-          Log Out
-        </button>
-      </div>
       <h1 className="text-2xl font-bold  text-left">Code Snippet Library</h1>
       <div className="flex-col items-center justify-center gap-5 font-bold mb-4 mt-2 ">
         <div>Hello {session?.user?.name}!</div>
@@ -130,11 +126,28 @@ export default function SnippetManager() {
           required
         />
         <div className="flex flex-wrap gap-4">
-          <button className="bg-emerald-500 text-white px-4 py-2 rounded">
+          <button
+            type="submit"
+            className="bg-emerald-500 text-white px-4 py-2 rounded"
+          >
             {editingId ? "Update Snippet" : "Save Snippet"}
           </button>
           {/* Search Field */}
+          <button
+            type="button" // prevent form submission
+            onClick={() => clearSearch()}
+            className="text-white bg-purple-700 rounded ml-4 px-2"
+          >
+            Clear Search
+          </button>
 
+          <button
+            type="button" // prevent form submission
+            onClick={() => signOut()}
+            className="bg-red-500 text-white px-6 py-2 ml-4 rounded"
+          >
+            Log Out
+          </button>
           <input
             type="text"
             value={searchQuery}
@@ -173,12 +186,15 @@ export default function SnippetManager() {
               >
                 Edit
               </button>
+
               <button
                 onClick={() => handleDelete(s._id)}
                 className="text-red-600 hover:underline"
               >
                 Delete
               </button>
+
+              <div />
             </div>
           </div>
         ))}
