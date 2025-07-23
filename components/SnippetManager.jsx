@@ -94,7 +94,7 @@ export default function SnippetManager() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-3 pt-1">
+    <div className="w-full mx-auto p-3 pt-1">
       <div className="flex justify-end">
         <button
           onClick={() => signOut()}
@@ -156,7 +156,7 @@ export default function SnippetManager() {
       </form>
 
       {/* Display the snippets in a responsive grid */}
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-6">
         {filteredSnippets.map((s) => (
           <div
             key={s._id}
