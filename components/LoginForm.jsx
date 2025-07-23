@@ -27,7 +27,7 @@ export default function LoginForm() {
         return;
       }
 
-      router.replace("dashboard");
+      router.replace("snipstart");
     } catch (error) {
       console.log(error);
     }

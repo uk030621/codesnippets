@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Code Snippets",
+  title: "Code Snippets Manager",
   description: "Developed by LWJ",
   icons: {
     icon: "/icons/icon-512x512.png", // Favicon
