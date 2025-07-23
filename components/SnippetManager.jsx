@@ -128,23 +128,16 @@ export default function SnippetManager() {
         <div className="flex flex-wrap gap-4">
           <button
             type="submit"
-            className="bg-emerald-500 text-white px-4 py-2 rounded"
+            className="bg-emerald-500 text-white px-4 py-1 rounded"
           >
             {editingId ? "Update Snippet" : "Save Snippet"}
           </button>
           {/* Search Field */}
-          <button
-            type="button" // prevent form submission
-            onClick={() => clearSearch()}
-            className="text-white bg-purple-700 rounded ml-4 px-2"
-          >
-            Clear Search
-          </button>
 
           <button
             type="button" // prevent form submission
             onClick={() => signOut()}
-            className="bg-red-500 text-white px-6 py-2 ml-4 rounded"
+            className="bg-red-500 text-white px-6 py-1  rounded"
           >
             Log Out
           </button>
@@ -155,6 +148,13 @@ export default function SnippetManager() {
             placeholder="Search..."
             className="w-full p-2 border-2 border-red-200 rounded bg-yellow-100"
           />
+          <button
+            type="button" // prevent form submission
+            onClick={() => clearSearch()}
+            className="text-white bg-purple-700 rounded py-1 px-2"
+          >
+            Clear Search
+          </button>
 
           {editingId && (
             <button
