@@ -109,44 +109,36 @@ export default function SnippetManager() {
         </div>
       </div>
       {/* Form for adding/editing snippets */}
-      <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+      <form onSubmit={handleSubmit} className="space-y-2 mb-8">
         <textarea
           ref={explanationRef} // Attach the reference
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border-2 border-emerald-500 rounded bg-emerald-100"
           placeholder="Enter Code function"
           value={explanation}
           onChange={(e) => setExplanation(e.target.value)}
           required
         />
         <textarea
-          className="w-full p-2 border rounded font-mono text-sm"
+          className="w-full p-2 border-2 border-emerald-500 bg-emerald-100 rounded font-mono text-sm"
           placeholder="Enter Code Snippet"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           required
         />
-        <div className="flex flex-wrap gap-4">
-          <button
-            type="submit"
-            className="bg-emerald-500 text-white px-4 py-1 rounded"
-          >
-            {editingId ? "Update Snippet" : "Save Snippet"}
-          </button>
-          {/* Search Field */}
+        <button
+          type="submit"
+          className="bg-emerald-500 text-white px-4 py-1 rounded mt-0"
+        >
+          {editingId ? "Update Snippet" : "Save Snippet"}
+        </button>
 
-          <button
-            type="button" // prevent form submission
-            onClick={() => signOut()}
-            className="bg-red-500 text-white px-6 py-1  rounded"
-          >
-            Log Out
-          </button>
+        <div className="flex flex-wrap gap-4 ">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search..."
-            className="w-full p-2 border-2 border-red-200 rounded bg-yellow-100"
+            className="w-full p-2 border-2 border-purple-700 rounded bg-purple-100 mt-6"
           />
           <button
             type="button" // prevent form submission
@@ -154,6 +146,13 @@ export default function SnippetManager() {
             className="text-white bg-purple-700 rounded py-1 px-2"
           >
             Clear Search
+          </button>
+          <button
+            type="button" // prevent form submission
+            onClick={() => signOut()}
+            className="bg-red-500 text-white px-6 py-1 rounded"
+          >
+            Log Out
           </button>
 
           {editingId && (
